@@ -86,7 +86,7 @@ async function updateProfiles(mutator) {
 
 function normalizeDone(done) {
   if (!Array.isArray(done)) return [];
-  return [...new Set(done.map(Number).filter((id) => Number.isInteger(id) && id >= 1 && id <= 11))].sort((a, b) => a - b);
+  return [...new Set(done.map(Number).filter((id) => Number.isInteger(id) && id >= 1 && id <= 21))].sort((a, b) => a - b);
 }
 
 function cleanProfile(profile) {

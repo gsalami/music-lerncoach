@@ -174,16 +174,186 @@ const goals = [
       { type: "choice", q: "Welche schwarzen Tasten braucht A-Dur?", hint: "Die 3 Kreuze.", a: "Cis, Fis, Gis", choices: ["Cis, Fis, Gis", "B, Es, As", "Fis, Cis, Dis", "Nur Fis"], explain: "A-Dur hat die Kreuze Fis, Cis, Gis. Auf der Klaviatur sind das schwarze Tasten." },
       { type: "choice", q: "Standard-Duktus rechte Hand für A-Dur?", hint: "Wie C-Dur: zwei Gruppen.", a: "1-2-3 | 1-2-3-4-5", choices: ["1-2-3 | 1-2-3-4-5", "1-2 | 1-2-3-4-5", "2-1-2-3-1-2-3-4", "1-2-3-4 | 1-2-3-4"], explain: "A-Dur nutzt den Standard-Fingersatz: 1-2-3, Daumen untersetzen, 1-2-3-4-5." }
     ]
+  },
+  {
+    id: 12,
+    group: "Prüfung II · Tempo",
+    day: 1,
+    title: "Tempo-Bezeichnungen kennen",
+    simple: "Tempo sagt, wie schnell Musik geht. Die italienischen Wörter stehen oft über dem Stück und haben ungefähr passende Schläge pro Minute.",
+    help: "Lerne die Wörter wie eine Leiter von langsam bis schnell: Largo, Adagio, Andante, Moderato, Allegro, Presto.",
+    memory: "Langsam nach schnell: Largo - Adagio - Andante - Moderato - Allegro - Presto.",
+    steps: ["Reihenfolge von langsam bis schnell aufsagen.", "Deutsche Bedeutung dazusagen.", "Ungefähre BPM-Zahl merken.", "Bei einem Stück zuerst Tempo-Wort suchen."],
+    visual: "tempo",
+    questions: [
+      { type: "choice", q: "Welches Tempo ist am schnellsten?", hint: "Die Reihenfolge endet sehr schnell.", a: "Presto", choices: ["Adagio", "Andante", "Allegro", "Presto"], explain: "Presto bedeutet sehr schnell und liegt ungefähr bei 168-200 Schlägen pro Minute oder mehr." },
+      { type: "choice", q: "Andante bedeutet ungefähr ...", hint: "Andare heisst gehen.", a: "gehend", choices: ["sehr langsam", "gehend", "sehr schnell", "feierlich"], explain: "Andante fühlt sich wie ein gehendes Tempo an, etwa 76-108 BPM." },
+      { type: "choice", q: "Welche Reihenfolge ist langsam bis schnell?", hint: "Largo zuerst, Presto zuletzt.", a: "Largo, Adagio, Andante, Moderato, Allegro, Presto", choices: ["Presto, Allegro, Moderato, Andante, Adagio, Largo", "Largo, Adagio, Andante, Moderato, Allegro, Presto", "Adagio, Largo, Allegro, Andante, Presto, Moderato"], explain: "So steigt das Tempo Schritt für Schritt von sehr langsam bis sehr schnell." }
+    ]
+  },
+  {
+    id: 13,
+    group: "Prüfung II · Gehör",
+    day: 1,
+    title: "Gerade, ungerade, Auftakt und Volltakt hören",
+    simple: "Gerade Takte fühlen sich in 2 oder 4 an. Ungerade Takte fühlen sich in 3 an. Ein Auftakt beginnt vor der ersten starken Eins.",
+    help: "Klatsche mit und suche die schwere Eins. Wenn die Musik direkt auf der Eins losgeht, ist es Volltakt. Wenn vorher ein kleiner Anfang kommt, ist es Auftakt.",
+    memory: "Gerade = 2 oder 4. Ungerade = 3. Auftakt = Anfang vor der Eins.",
+    steps: ["Puls mitklopfen.", "Starke Eins suchen.", "Bis zur nächsten Eins zählen.", "2 oder 4 ist gerade, 3 ist ungerade.", "Prüfen, ob der Anfang vor der ersten Eins liegt."],
+    visual: "meter",
+    questions: [
+      { type: "choice", q: "Ein 3/4-Takt ist ...", hint: "Drei Zählzeiten sind nicht durch zwei teilbar.", a: "ungerade", choices: ["gerade", "ungerade", "immer Auftakt", "immer Volltakt"], explain: "3/4 hat drei Zählzeiten und fühlt sich deshalb ungerade an." },
+      { type: "choice", q: "Was ist ein Auftakt?", hint: "Der Anfang kommt vor der ersten vollen Eins.", a: "Ein unvollständiger Anfang vor dem ersten Volltakt", choices: ["Ein sehr schneller Takt", "Ein unvollständiger Anfang vor dem ersten Volltakt", "Immer ein 4/4-Takt", "Eine Pause am Schluss"], explain: "Beim Auftakt startet die Melodie kurz vor der ersten starken Eins." },
+      { type: "choice", q: "2/4 und 4/4 fühlen sich meistens ...", hint: "2 und 4 sind gerade Zahlen.", a: "gerade an", choices: ["gerade an", "ungerade an", "wie Moll an", "wie Presto an"], explain: "2/4 und 4/4 haben eine gerade Anzahl Zählzeiten." }
+    ]
+  },
+  {
+    id: 14,
+    group: "Prüfung II · Taktarten",
+    day: 1,
+    title: "Taktarten in Hörbeispielen erkennen",
+    simple: "Beim Hören erkennst du Taktarten, indem du den Puls und die schwere Eins findest. Dann zählst du, nach wie vielen Schlägen die Eins wiederkommt.",
+    help: "Für das Handout: Tragt die Werktitel als kleine Hörliste ein. Bei jedem Werk zuerst mitklopfen, dann 1-2, 1-2-3 oder 1-2-3-4 zählen.",
+    memory: "Eins finden, bis zur nächsten Eins zählen, Taktart nennen.",
+    steps: ["Werk anhören.", "Grundpuls klopfen.", "Starke Eins markieren.", "Schläge bis zur nächsten Eins zählen.", "Taktart notieren und mit dem Handout vergleichen."],
+    visual: "meter",
+    questions: [
+      { type: "choice", q: "Du hörst: stark-leicht-leicht, stark-leicht-leicht. Welche Taktart passt am besten?", hint: "Drei Schläge pro Gruppe.", a: "3/4", choices: ["2/4", "3/4", "4/4", "6/8"], explain: "Stark-leicht-leicht ist typisch für 3/4, zum Beispiel beim Walzergefühl." },
+      { type: "choice", q: "Was suchst du beim Hören zuerst?", hint: "Ohne Puls kann man nicht zählen.", a: "den Puls und die starke Eins", choices: ["die Vorzeichen", "den Puls und die starke Eins", "die Tonart", "den höchsten Ton"], explain: "Der Puls und die starke Eins helfen dir, die Schläge pro Takt zu zählen." },
+      { type: "choice", q: "Wenn die Eins nach vier Schlägen wiederkommt, passt oft ...", hint: "Vier Zählzeiten.", a: "4/4", choices: ["2/4", "3/4", "4/4", "5/4"], explain: "Bei 4/4 zählst du 1-2-3-4, dann kommt wieder 1." }
+    ]
+  },
+  {
+    id: 15,
+    group: "Prüfung II · Gehör",
+    day: 2,
+    title: "Dur und Moll nach Gehör unterscheiden",
+    simple: "Dur klingt oft hell und offen. Moll klingt oft dunkler. Reine, harmonische und melodische Molltonleitern haben unterschiedliche sechste und siebte Stufen.",
+    help: "Höre besonders auf den oberen Teil der Tonleiter. Harmonisch Moll hat eine erhöhte siebte Stufe und klingt dadurch sehr spannungsvoll.",
+    memory: "Dur hell. Reine Moll dunkel. Harmonisch Moll: siebte Stufe hoch. Melodisch Moll: aufwärts sechste und siebte hoch.",
+    steps: ["Erst Dur oder Moll-Gefühl hören.", "Oberen Teil der Tonleiter beachten.", "Bei harmonisch Moll auf den grossen Sprung vor dem Leitton hören.", "Bei melodisch Moll aufwärts auf erhöhte 6 und 7 achten."],
+    visual: "minorScales",
+    questions: [
+      { type: "choice", q: "Welche Tonleiter klingt meistens heller?", hint: "Dur wird oft als hell/offen beschrieben.", a: "Dur", choices: ["Dur", "reine Moll", "harmonische Moll", "melodische Moll"], explain: "Dur hat eine grosse Terz und klingt dadurch oft heller als Moll." },
+      { type: "choice", q: "Was ist typisch für harmonisch Moll?", hint: "Die siebte Stufe wird erhöht.", a: "erhöhte 7. Stufe", choices: ["erhöhte 4. Stufe", "erhöhte 7. Stufe", "keine Halbtöne", "nur schwarze Tasten"], explain: "Harmonisch Moll erhöht die siebte Stufe. Dadurch entsteht ein starker Leitton zum Grundton." },
+      { type: "choice", q: "Melodisch Moll hat aufwärts meist ...", hint: "Zwei Stufen werden erhöht.", a: "erhöhte 6. und 7. Stufe", choices: ["erhöhte 2. und 3. Stufe", "erhöhte 6. und 7. Stufe", "erniedrigte 5. Stufe", "keine Vorzeichen"], explain: "Melodisch Moll erhöht aufwärts die sechste und siebte Stufe; abwärts wird oft reine Moll verwendet." }
+    ]
+  },
+  {
+    id: 16,
+    group: "Prüfung II · Tonleitern",
+    day: 2,
+    title: "Dur, reine Moll, harmonische Moll und melodische Moll schreiben",
+    simple: "Dur und Moll haben feste Schrittmuster. Bei Moll kannst du zuerst reine Moll schreiben und dann für harmonisch oder melodisch einzelne Stufen erhöhen.",
+    help: "Praktisch: Reine Moll ist der Start. Harmonisch Moll = siebte Stufe erhöhen. Melodisch Moll aufwärts = sechste und siebte Stufe erhöhen.",
+    memory: "Dur: G-G-H-G-G-G-H. Reine Moll: G-H-G-G-H-G-G. Harmonisch: 7 hoch. Melodisch: 6 und 7 hoch.",
+    steps: ["Grundton schreiben.", "Buchstaben der Reihe nach bis zur Oktave schreiben.", "Passendes Muster prüfen.", "Bei harmonisch Moll die 7. Stufe erhöhen.", "Bei melodisch Moll aufwärts 6. und 7. Stufe erhöhen."],
+    visual: "minorScales",
+    questions: [
+      { type: "choice", q: "Wie lautet das Muster der reinen Molltonleiter?", hint: "Zum Beispiel a-Moll: A-H-C-D-E-F-G-A.", a: "G-H-G-G-H-G-G", choices: ["G-G-H-G-G-G-H", "G-H-G-G-H-G-G", "H-G-G-H-G-G-G", "G-G-G-H-G-H-G"], explain: "Reine Moll hat das Muster Ganzton, Halbton, Ganzton, Ganzton, Halbton, Ganzton, Ganzton." },
+      { type: "choice", q: "Welche Stufe wird bei harmonisch Moll erhöht?", hint: "Der Leitton direkt vor dem Grundton.", a: "7. Stufe", choices: ["3. Stufe", "5. Stufe", "6. Stufe", "7. Stufe"], explain: "Die 7. Stufe wird erhöht, damit sie stark zum Grundton hinzieht." },
+      { type: "choice", q: "a-Moll harmonisch lautet ...", hint: "a-Moll rein: A H C D E F G A. 7 hoch.", a: "A H C D E F Gis A", choices: ["A H C D E F G A", "A H C D E F Gis A", "A H Cis D E Fis Gis A", "A B C D E F G A"], explain: "In a-Moll harmonisch wird G zu Gis." }
+    ]
+  },
+  {
+    id: 17,
+    group: "Prüfung II · Rhythmus",
+    day: 2,
+    title: "Rhythmuswerte in Taktsprache",
+    simple: "Taktsprache macht Notenwerte sprechbar. So kann man Rhythmus klatschen und sprechen, bevor man ihn schreibt.",
+    help: "Falls eure Lehrperson andere Silben nutzt, bleiben die Längen trotzdem gleich: Ganze lang, Halbe halb so lang, Viertel eine Zählzeit, Achtel zwei pro Zählzeit, Sechzehntel vier pro Zählzeit.",
+    memory: "Viertel = ta. Achtel = ti-ti. Sechzehntel = tiri-tiri. Wichtig ist die Länge.",
+    steps: ["Notenwert erkennen.", "Passende Silbe sprechen.", "Puls gleichmässig klopfen.", "Rhythmus langsam sprechen.", "Dann klatschen oder schreiben."],
+    visual: "timeMath",
+    questions: [
+      { type: "choice", q: "Wie viele Sechzehntel passen in eine Viertel?", hint: "Eine Viertel teilt sich in vier kleine Teile.", a: "4", choices: ["2", "3", "4", "8"], explain: "Vier Sechzehntel ergeben zusammen eine Viertelnote." },
+      { type: "choice", q: "Zwei Achtel dauern zusammen wie ...", hint: "Achtel + Achtel = Viertel.", a: "eine Viertel", choices: ["eine Viertel", "eine Halbe", "eine Ganze", "eine punktierte Halbe"], explain: "Zwei Achtel füllen eine Zählzeit im 4/4-Takt." },
+      { type: "choice", q: "Was hilft bei Taktsprache am meisten?", hint: "Der Puls darf nicht wackeln.", a: "gleichmässig zählen und sprechen", choices: ["schneller werden", "Vorzeichen zählen", "gleichmässig zählen und sprechen", "nur die hohen Töne suchen"], explain: "Taktsprache funktioniert, wenn Puls und Silben stabil bleiben." }
+    ]
+  },
+  {
+    id: 18,
+    group: "Prüfung II · Rhythmus",
+    day: 2,
+    title: "Zählzeiten eines Taktes anwenden",
+    simple: "Die obere Zahl der Taktart sagt, wie viele Zählzeiten in einen Takt passen. Diese Zählzeiten musst du beim Lesen, Klatschen und Ergänzen anwenden.",
+    help: "Bei 3/4 zählst du 1-2-3. Bei 4/4 zählst du 1-2-3-4. Jeder Takt muss am Ende genau voll sein.",
+    memory: "Obere Zahl = wie viele Zählzeiten. Untere Zahl = welcher Notenwert zählt.",
+    steps: ["Taktart anschauen.", "Zählzeiten pro Takt bestimmen.", "Notenwerte zusammenrechnen.", "Fehlende Werte ergänzen.", "Jeden Takt prüfen."],
+    visual: "timeMath",
+    questions: [
+      { type: "choice", q: "Wie zählt man einen 3/4-Takt?", hint: "Obere Zahl ist 3.", a: "1 2 3", choices: ["1 2", "1 2 3", "1 2 3 4", "1 und 2 und 3 und 4 und"], explain: "3/4 hat drei Viertel-Zählzeiten pro Takt." },
+      { type: "choice", q: "Im 4/4-Takt sind schon eine Halbe und eine Viertel da. Was fehlt?", hint: "Halbe = 2, Viertel = 1, zusammen 3.", a: "eine Viertel", choices: ["eine Viertel", "eine Halbe", "eine Ganze", "drei Viertel"], explain: "Im 4/4 braucht der Takt 4 Zählzeiten. 2 + 1 = 3, also fehlt 1 Viertel." },
+      { type: "choice", q: "Was sagt die obere Zahl bei 2/4?", hint: "Die Zahl oben ist 2.", a: "2 Zählzeiten pro Takt", choices: ["2 Zählzeiten pro Takt", "Viertel sind verboten", "2 Vorzeichen", "2 Tonarten"], explain: "Die obere Zahl nennt die Anzahl Zählzeiten pro Takt." }
+    ]
+  },
+  {
+    id: 19,
+    group: "Prüfung II · Taktarten",
+    day: 3,
+    title: "Taktarten erkennen und Notenwerte ergänzen",
+    simple: "Eine Taktart ist wie ein Behälter. In jeden Takt muss genau die richtige Menge an Noten- und Pausenwerten passen.",
+    help: "Rechne jeden Takt wie eine kleine Rechnung. Wenn etwas fehlt, ergänze genau den Wert, der den Takt voll macht.",
+    memory: "Takt voll? Werte addieren. Fehlt etwas? Restwert ergänzen.",
+    steps: ["Taktart lesen.", "Soll-Wert pro Takt bestimmen.", "Vorhandene Werte addieren.", "Rest berechnen.", "Passende Note oder Pause ergänzen."],
+    visual: "timeMath",
+    questions: [
+      { type: "choice", q: "Im 3/4-Takt stehen zwei Viertel. Was fehlt?", hint: "3 minus 2 ist 1.", a: "eine Viertel", choices: ["eine Viertel", "eine Halbe", "eine Ganze", "zwei Halbe"], explain: "3/4 braucht drei Viertel. Zwei sind da, eine Viertel fehlt." },
+      { type: "choice", q: "Im 2/4-Takt steht eine punktierte Viertel. Was fehlt?", hint: "Punktierte Viertel = 1.5, der Takt braucht 2.", a: "eine Achtel", choices: ["eine Achtel", "eine Viertel", "eine Halbe", "eine Ganze"], explain: "2 - 1.5 = 0.5. Eine Achtel dauert 0.5 Zählzeiten." },
+      { type: "choice", q: "Woran erkennst du die Taktart in Notenschrift?", hint: "Sie steht am Anfang als zwei Zahlen.", a: "an den zwei Zahlen nach dem Schlüssel und den Vorzeichen", choices: ["an der letzten Note", "an den zwei Zahlen nach dem Schlüssel und den Vorzeichen", "an der Farbe der Noten", "an der Tonart"], explain: "Die Taktart steht am Anfang, meistens nach Schlüssel und Vorzeichen." }
+    ]
+  },
+  {
+    id: 20,
+    group: "Prüfung II · Tonarten",
+    day: 3,
+    title: "Paralleltonart und Varianttonart umschreiben",
+    simple: "Paralleltonarten haben dieselben Vorzeichen, aber einen anderen Grundton. Varianttonarten haben denselben Grundton, aber wechseln zwischen Dur und Moll.",
+    help: "Dur zur Parallel-Molltonart: drei Halbtonschritte abwärts. Moll zur Parallel-Durtonart: drei Halbtonschritte aufwärts. Variante heisst: gleicher Grundton, anderes Geschlecht.",
+    memory: "Parallel = gleiche Vorzeichen. Variante = gleicher Grundton.",
+    steps: ["Tonart bestimmen.", "Parallel: drei Halbtonschritte in die richtige Richtung gehen.", "Vorzeichen gleich lassen.", "Variant: Grundton behalten.", "Dur/Moll-Vorzeichen neu anpassen."],
+    visual: "keys",
+    questions: [
+      { type: "choice", q: "Was ist die Paralleltonart von C-Dur?", hint: "Drei Halbtonschritte abwärts: C-H-B-A.", a: "a-Moll", choices: ["c-Moll", "a-Moll", "G-Dur", "F-Dur"], explain: "C-Dur und a-Moll haben beide keine Vorzeichen." },
+      { type: "choice", q: "Was ist die Varianttonart von C-Dur?", hint: "Gleicher Grundton, Dur wird Moll.", a: "c-Moll", choices: ["a-Moll", "c-Moll", "G-Dur", "F-Dur"], explain: "Varianttonart behält den Grundton C, wechselt aber von Dur nach Moll." },
+      { type: "choice", q: "Paralleltonarten haben ...", hint: "C-Dur und a-Moll haben beide keine Vorzeichen.", a: "dieselben Vorzeichen", choices: ["denselben Grundton", "dieselben Vorzeichen", "immer gleiches Tempo", "immer drei Kreuze"], explain: "Paralleltonarten teilen sich die Vorzeichen, haben aber unterschiedliche Grundtöne." }
+    ]
+  },
+  {
+    id: 21,
+    group: "Prüfung II · Anwendung",
+    day: 3,
+    title: "Gelerntes in kleinen Kompositionen anwenden",
+    simple: "In einer kleinen Komposition verbindest du Tonart, Taktart, Rhythmus, Tempo und passende Töne zu einer kurzen musikalischen Idee.",
+    help: "Halte es einfach: Wähle zuerst Tonart, Taktart und Tempo. Dann schreibe zwei bis vier Takte, die rhythmisch vollständig sind und zur Tonleiter passen.",
+    memory: "Tonart + Taktart + Tempo + vollständige Takte = saubere Mini-Komposition.",
+    steps: ["Tonart wählen und Vorzeichen setzen.", "Taktart wählen.", "Tempo-Wort dazuschreiben.", "Rhythmuswerte so wählen, dass jeder Takt voll ist.", "Melodie mit Tönen aus der Tonleiter schreiben."],
+    visual: "composition",
+    questions: [
+      { type: "choice", q: "Was sollte am Anfang einer kleinen Komposition klar sein?", hint: "Damit man weiss, wie gelesen und gezählt wird.", a: "Tonart, Taktart und Tempo", choices: ["nur die Farbe", "Tonart, Taktart und Tempo", "nur der höchste Ton", "nur der Name"], explain: "Tonart, Taktart und Tempo geben die wichtigsten Regeln für das Stück." },
+      { type: "choice", q: "Warum prüfst du jeden Takt?", hint: "Der Takt muss voll sein.", a: "damit die Notenwerte zur Taktart passen", choices: ["damit alle Noten gleich hoch sind", "damit die Notenwerte zur Taktart passen", "damit es keine Pausen gibt", "damit es nur Dur ist"], explain: "Jeder Takt muss genau so viele Zählzeiten haben, wie die Taktart verlangt." },
+      { type: "choice", q: "Welche Töne passen in C-Dur am sichersten?", hint: "C-Dur hat keine Vorzeichen.", a: "C D E F G A H C", choices: ["C D E F G A H C", "C Des E Fis G As H C", "C D Es F G As B C", "Nur schwarze Tasten"], explain: "C-Dur nutzt die Stammtöne ohne Kreuze oder Bes." }
+    ]
   }
 ];
 
 const dayPlans = {
-  1: "Fundament: Noten lesen, Rhythmuswerte und Ganzton/Halbton. Heute geht es um sichere Basics.",
-  2: "Tonleitern: Dur-Muster, Kreuz-/Be-Tonarten und Vorzeichen-Reihenfolgen. Das ist der wichtigste Tag.",
-  3: "Anwendung: Tonarten erkennen, Quintenzirkel, Klaviatur/Duktus und Prüfungsmix."
+  1: "Fundament plus Prüfung II: Noten/Rhythmus auffrischen, Tempo lernen und gerade/ungerade Takte hören.",
+  2: "Tonleitern und Rhythmus: Dur/Moll hören und schreiben, Taktsprache und Zählzeiten sicher machen.",
+  3: "Anwendung: Taktarten ergänzen, Parallel-/Varianttonart, Quintenzirkel, Klaviatur und Prüfungsmix."
 };
 
 const priorityMeta = {
+  15: { level: "Sehr hoch", reason: "Gehörbildung zu Dur/Moll ist neu und prüfungsnah" },
+  16: { level: "Sehr hoch", reason: "Moll-Tonleitern lesen und schreiben ist zentral für Prüfung II" },
+  20: { level: "Sehr hoch", reason: "Parallel- und Varianttonart sind typische Transferaufgaben" },
+  19: { level: "Sehr hoch", reason: "Taktarten und fehlende Notenwerte geben sichere Punkte" },
+  12: { level: "Hoch", reason: "Tempo-Wörter kann man schnell auswendig sichern" },
+  13: { level: "Hoch", reason: "Gehör-Aufgaben brauchen kurze tägliche Wiederholung" },
+  17: { level: "Hoch", reason: "Taktsprache stabilisiert Rhythmusaufgaben" },
+  18: { level: "Hoch", reason: "Zählzeiten sind die Basis fürs Ergänzen von Takten" },
+  14: { level: "Mittel", reason: "Mit dem Handout als Hörliste üben" },
+  21: { level: "Mittel", reason: "Verbindet alle Themen in einer kleinen Anwendung" },
   4: { level: "Sehr hoch", reason: "Basis für Tonleitern, Vorzeichen und Klaviatur" },
   6: { level: "Sehr hoch", reason: "Ohne Reihenfolge klappen Tonarten und Vorzeichen nicht" },
   9: { level: "Sehr hoch", reason: "Kommt häufig als Prüfungs-Anwendung vor" },
@@ -197,7 +367,7 @@ const priorityMeta = {
   7: { level: "Mittel", reason: "Positionen zeichnen, wenn die Reihenfolge sitzt" }
 };
 
-const priorityOrder = [4, 6, 9, 1, 2, 5, 10, 8, 11, 3, 7];
+const priorityOrder = [15, 16, 20, 19, 12, 13, 17, 18, 14, 21, 4, 6, 9, 1, 2, 5, 10, 8, 11, 3, 7];
 
 let currentGoalId = 1;
 let currentDay = 1;
@@ -266,7 +436,10 @@ const scaleNotes = {
   C: ["C4", "D4", "E4", "F4", "G4", "A4", "H4", "C5"],
   G: ["G4", "A4", "H4", "C5", "D5", "E5", "Fis5", "G5"],
   A: ["A4", "H4", "Cis5", "D5", "E5", "Fis5", "Gis5", "A5"],
-  F: ["F4", "G4", "A4", "Ais4", "C5", "D5", "E5", "F5"]
+  F: ["F4", "G4", "A4", "Ais4", "C5", "D5", "E5", "F5"],
+  "a-Moll rein": ["A4", "H4", "C5", "D5", "E5", "F5", "G5", "A5"],
+  "a-Moll harmonisch": ["A4", "H4", "C5", "D5", "E5", "F5", "Gis5", "A5"],
+  "a-Moll melodisch": ["A4", "H4", "C5", "D5", "E5", "Fis5", "Gis5", "A5"]
 };
 
 examDateInput.value = storedExamDate;
@@ -414,8 +587,8 @@ function renderTabs() {
 }
 
 function renderProgress() {
-  const count = done.size;
-  progressCount.textContent = `${count}/11`;
+  const count = goals.filter((goal) => done.has(goal.id)).length;
+  progressCount.textContent = `${count}/${goals.length}`;
   progressBar.style.width = `${(count / goals.length) * 100}%`;
   renderTracker();
 }
@@ -435,7 +608,8 @@ function daysUntilExam() {
 }
 
 function renderTracker() {
-  const remaining = goals.length - done.size;
+  const completedCount = goals.filter((goal) => done.has(goal.id)).length;
+  const remaining = goals.length - completedCount;
   const daysLeft = daysUntilExam();
   const undoneGoals = priorityOrder.map((id) => goals.find((goal) => goal.id === id)).filter((goal) => goal && !done.has(goal.id));
 
@@ -550,6 +724,79 @@ function renderVisual(type) {
         <div class="rhythm-chip">Halbe<br>2 ZZ</div>
         <div class="rhythm-chip">Viertel<br>1 ZZ</div>
         <div class="rhythm-chip">Achtel<br>0.5 ZZ</div>
+      </div>
+    `;
+    return;
+  }
+
+  if (type === "tempo") {
+    visualZone.innerHTML = `
+      <div class="circle-row">
+        ${[
+          "Largo<br>sehr langsam<br>ca. 40-60",
+          "Adagio<br>langsam<br>ca. 66-76",
+          "Andante<br>gehend<br>ca. 76-108",
+          "Moderato<br>mässig<br>ca. 108-120",
+          "Allegro<br>schnell<br>ca. 120-168",
+          "Presto<br>sehr schnell<br>ca. 168+"
+        ].map((item) => `<div class="circle-chip is-wide">${item}</div>`).join("")}
+      </div>
+    `;
+    return;
+  }
+
+  if (type === "meter") {
+    visualZone.innerHTML = `
+      <div class="rhythm-row">
+        <div class="rhythm-chip">2/4<br>gerade<br>1 2</div>
+        <div class="rhythm-chip">3/4<br>ungerade<br>1 2 3</div>
+        <div class="rhythm-chip">4/4<br>gerade<br>1 2 3 4</div>
+        <div class="rhythm-chip">Auftakt<br>vor der Eins</div>
+      </div>
+    `;
+    return;
+  }
+
+  if (type === "minorScales") {
+    visualZone.innerHTML = `
+      <div class="circle-row">
+        <div class="circle-chip is-wide">Dur<br>G-G-H-G-G-G-H</div>
+        <div class="circle-chip is-wide">Reine Moll<br>G-H-G-G-H-G-G</div>
+        <div class="circle-chip is-wide">Harmonisch Moll<br>7. Stufe hoch</div>
+        <div class="circle-chip is-wide">Melodisch Moll<br>aufwärts 6 + 7 hoch</div>
+      </div>
+    `;
+    return;
+  }
+
+  if (type === "timeMath") {
+    visualZone.innerHTML = `
+      <div class="rhythm-row">
+        <div class="rhythm-chip">Ganze<br>4</div>
+        <div class="rhythm-chip">Halbe<br>2</div>
+        <div class="rhythm-chip">Viertel<br>1</div>
+        <div class="rhythm-chip">Achtel<br>0.5</div>
+        <div class="rhythm-chip">Sechzehntel<br>0.25</div>
+      </div>
+    `;
+    return;
+  }
+
+  if (type === "keys") {
+    visualZone.innerHTML = `
+      <div class="circle-row">
+        <div class="circle-chip is-wide">Parallel<br>gleiche Vorzeichen<br>C-Dur -> a-Moll</div>
+        <div class="circle-chip is-wide">Dur -> Moll<br>3 Halbtöne abwärts</div>
+        <div class="circle-chip is-wide">Variante<br>gleicher Grundton<br>C-Dur -> c-Moll</div>
+      </div>
+    `;
+    return;
+  }
+
+  if (type === "composition") {
+    visualZone.innerHTML = `
+      <div class="circle-row">
+        ${["Tonart", "Taktart", "Tempo", "Rhythmus", "Melodie", "prüfen"].map((item) => `<div class="circle-chip">${item}</div>`).join("")}
       </div>
     `;
     return;
@@ -686,7 +933,8 @@ function playChallenge() {
 
 function playScale(scaleName) {
   const notes = scaleNotes[scaleName] || [];
-  setEarStatus(`${scaleName}-Dur wird vorgespielt. Danach kann sie die Tasten selbst nachspielen.`);
+  const label = ["C", "G", "A", "F"].includes(scaleName) ? `${scaleName}-Dur` : scaleName;
+  setEarStatus(`${label} wird vorgespielt. Danach kann sie die Tasten selbst nachspielen.`);
   notes.forEach((noteName, index) => {
     window.setTimeout(() => {
       playTone(noteName, 0.35);

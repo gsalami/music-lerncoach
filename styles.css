@@ -620,6 +620,11 @@ p {
   background: var(--teal-soft);
 }
 
+.circle-chip.is-wide {
+  line-height: 1.35;
+  font-size: 13px;
+}
+
 .explain-box {
   display: grid;
   gap: 10px;
