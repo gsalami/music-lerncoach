@@ -173,9 +173,10 @@ async function serveStatic(response, pathname) {
   try {
     const content = await fs.readFile(absolutePath);
     const ext = path.extname(absolutePath);
+    const cacheControl = [".html", ".js", ".css"].includes(ext) ? "no-cache" : "public, max-age=3600";
     response.writeHead(200, {
       "Content-Type": mimeTypes[ext] || "application/octet-stream",
-      "Cache-Control": ext === ".html" ? "no-cache" : "public, max-age=3600"
+      "Cache-Control": cacheControl
     });
     response.end(content);
   } catch (error) {

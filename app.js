@@ -385,6 +385,24 @@ function queueProfileSave() {
   }, 250);
 }
 
+function saveProfileNow() {
+  window.clearTimeout(saveTimer);
+  localStorage.setItem("musicCoachExamDate", examDateInput.value);
+  renderTracker();
+  saveProfile();
+}
+
+async function refreshActiveProfile() {
+  if (!activeProfile?.id) return;
+  setProfileStatus(`Lade ${activeProfile.name || activeProfile.id} vom Server...`);
+  try {
+    const profile = await apiRequest(`/profiles/${encodeURIComponent(activeProfile.id)}`);
+    applyProfile(profile);
+  } catch (error) {
+    setProfileStatus(`Konnte Profil nicht frisch laden. Lokal bleibt es erhalten. ${error.message}`, "is-error");
+  }
+}
+
 function renderTabs() {
   tabs.innerHTML = goals
     .map((goal) => {
@@ -774,9 +792,9 @@ document.querySelectorAll(".day-button").forEach((button) => {
   });
 });
 
-["input", "change", "blur"].forEach((eventName) => {
-  examDateInput.addEventListener(eventName, queueProfileSave);
-});
+examDateInput.addEventListener("input", queueProfileSave);
+examDateInput.addEventListener("change", saveProfileNow);
+examDateInput.addEventListener("blur", saveProfileNow);
 
 document.querySelector("#createProfileButton").addEventListener("click", createProfile);
 document.querySelector("#loadProfileButton").addEventListener("click", loadProfile);
@@ -832,3 +850,4 @@ if (activeProfile?.id) {
 }
 renderDay();
 renderLesson();
+refreshActiveProfile();
