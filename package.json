@@ -1,0 +1,14 @@
+{
+  "name": "music-lerncoach",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Mobile-first Musik-Lerncoach mit Profil-ID und Fortschrittsspeicherung.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check app.js && node --check server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

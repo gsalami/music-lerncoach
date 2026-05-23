@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Musik Lerncoach</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">2. Musikprüfung</p>
+          <h1>Lerncoach</h1>
+        </div>
+        <button class="icon-button" id="resetButton" type="button" aria-label="Fortschritt zurücksetzen" title="Fortschritt zurücksetzen">
+          ↺
+        </button>
+      </header>
+
+      <main>
+        <section class="today-panel" aria-labelledby="todayTitle">
+          <div>
+            <p class="eyebrow">3-Tage-Plan</p>
+            <h2 id="todayTitle">Heute lernen</h2>
+            <p id="dayFocus">Wähle einen Tag, dann starten wir mit den wichtigsten Lernzielen.</p>
+          </div>
+          <div class="day-switch" role="tablist" aria-label="Lerntag wählen">
+            <button class="day-button is-active" type="button" data-day="1">Tag 1</button>
+            <button class="day-button" type="button" data-day="2">Tag 2</button>
+            <button class="day-button" type="button" data-day="3">Tag 3</button>
+          </div>
+        </section>
+
+        <section class="progress-strip" aria-label="Fortschritt">
+          <div>
+            <strong id="progressCount">0/11</strong>
+            <span>Lernziele sicher</span>
+          </div>
+          <div class="progress-track">
+            <span id="progressBar"></span>
+          </div>
+        </section>
+
+        <section class="profile-panel" aria-labelledby="profileTitle">
+          <div>
+            <p class="eyebrow">Profil</p>
+            <h2 id="profileTitle">Fortschritt speichern</h2>
+            <p>Gib einen Namen ein und erhalte eine Lern-ID. Mit dieser ID kann der Fortschritt später wieder geladen werden.</p>
+          </div>
+          <div class="profile-grid">
+            <label class="date-field">
+              <span>Name</span>
+              <input id="profileNameInput" type="text" autocomplete="name" placeholder="z.B. Lara" />
+            </label>
+            <button class="primary-button" id="createProfileButton" type="button">ID erstellen</button>
+            <label class="date-field">
+              <span>Lern-ID laden</span>
+              <input id="profileIdInput" type="text" autocomplete="off" placeholder="z.B. lara-a7k9q" />
+            </label>
+            <button class="text-button" id="loadProfileButton" type="button">Laden</button>
+          </div>
+          <div class="profile-status" id="profileStatus">Noch kein Profil verbunden. Fortschritt wird auf diesem Gerät gespeichert.</div>
+        </section>
+
+        <section class="tracker-panel" aria-labelledby="trackerTitle">
+          <div class="tracker-form">
+            <div>
+              <p class="eyebrow">Prüfungstermin</p>
+              <h2 id="trackerTitle">Bin ich on track?</h2>
+            </div>
+            <label class="date-field">
+              <span>Datum</span>
+              <input id="examDateInput" type="date" />
+            </label>
+          </div>
+          <div class="track-status" id="trackStatus"></div>
+          <div class="priority-list" id="priorityList" aria-label="Was als Nächstes lernen"></div>
+        </section>
+
+        <nav class="goal-tabs" id="goalTabs" aria-label="Lernziele"></nav>
+
+        <section class="lesson-layout">
+          <article class="lesson-card" aria-labelledby="goalTitle">
+            <div class="lesson-head">
+              <div>
+                <p class="eyebrow" id="goalGroup">Lernziel</p>
+                <h2 id="goalTitle"></h2>
+              </div>
+              <button class="mark-button" id="markButton" type="button">Sitzt</button>
+            </div>
+
+            <div class="visual-zone" id="visualZone" aria-label="Visualisierung"></div>
+
+            <div class="explain-box">
+              <p id="simpleExplanation"></p>
+              <button class="text-button" id="moreHelpButton" type="button">Einfacher erklären</button>
+              <p class="help-text" id="helpText" hidden></p>
+            </div>
+
+            <div class="memory-box">
+              <span>Merksatz</span>
+              <strong id="memoryText"></strong>
+            </div>
+
+            <div class="micro-steps" id="microSteps"></div>
+          </article>
+
+          <aside class="practice-card" aria-labelledby="practiceTitle">
+            <div class="practice-head">
+              <div>
+                <p class="eyebrow">Übung</p>
+                <h2 id="practiceTitle">Wissensabfrage</h2>
+              </div>
+              <button class="text-button" id="newQuestionButton" type="button">Neue Frage</button>
+            </div>
+
+            <div id="questionBox" class="question-box"></div>
+            <div id="answerArea" class="answer-area"></div>
+            <div id="feedbackBox" class="feedback-box" aria-live="polite"></div>
+          </aside>
+        </section>
+
+        <section class="exam-panel" aria-labelledby="examTitle">
+          <div>
+            <p class="eyebrow">Prüfungstraining</p>
+            <h2 id="examTitle">10-Minuten-Runde</h2>
+            <p>Für unterwegs: zehn schnelle Fragen quer durch alle Lernziele. Ideal im Tram, auf dem Sofa oder direkt vor dem Üben.</p>
+          </div>
+          <button class="primary-button" id="mixedQuizButton" type="button">Mix starten</button>
+        </section>
+
+        <section class="ear-panel" aria-labelledby="earTitle">
+          <div class="ear-head">
+            <div>
+              <p class="eyebrow">Klaviatur</p>
+              <h2 id="earTitle">Töne üben und hören</h2>
+              <p>Tippe eine Taste an, um den Ton zu hören. Im Hörtraining spielt die App einen Ton vor und sie tippt die passende Taste.</p>
+            </div>
+            <button class="primary-button" id="playChallengeButton" type="button">Ton vorspielen</button>
+          </div>
+
+          <div class="ear-status" id="earStatus">Bereit. Erst eine Taste antippen oder einen Ton vorspielen.</div>
+          <div class="piano-trainer" id="pianoTrainer" aria-label="Interaktive Klaviatur"></div>
+
+          <div class="tone-controls" aria-label="Tonübungen">
+            <button class="text-button" type="button" data-scale="C">C-Dur hören</button>
+            <button class="text-button" type="button" data-scale="G">G-Dur hören</button>
+            <button class="text-button" type="button" data-scale="A">A-Dur hören</button>
+            <button class="text-button" type="button" data-scale="F">F-Dur hören</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
