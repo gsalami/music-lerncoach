@@ -100,14 +100,15 @@ const goals = [
     group: "Anwendung",
     day: 3,
     title: "Vorzeichen an den richtigen Ort schreiben",
-    simple: "Vorzeichen stehen nicht irgendwo. Sie werden im Schlüssel auf festen Linien oder Zwischenräumen geschrieben.",
-    help: "Für die Prüfung ist zuerst die Reihenfolge wichtig. Danach übt ihr die Positionen mit Zeichnen im Notensystem.",
-    memory: "Reihenfolge zuerst, Ort danach: Fis-Cis-Gis... oder B-Es-As...",
-    steps: ["Tonart bestimmen.", "Anzahl Vorzeichen zählen.", "Vorzeichen-Reihenfolge nehmen.", "Im richtigen Schlüssel an die feste Position setzen."],
-    visual: "staff",
+    simple: "Vorzeichen sind die Kreuze oder Bes am Anfang eines Notensystems. Sie sagen: Dieser Ton wird im ganzen Stück immer erhöht oder erniedrigt.",
+    help: "Denke in drei Fragen: Welche Tonart? Dann weisst du, wie viele Vorzeichen. Welche Reihenfolge? Dann weisst du, welche Vorzeichen. Welcher Schlüssel? Dann weisst du, auf welche Linie oder in welchen Zwischenraum du sie zeichnest.",
+    memory: "Nicht raten: Tonart -> Anzahl -> Reihenfolge -> Ort im Schlüssel.",
+    steps: ["Tonart lesen: z.B. A-Dur.", "Anzahl finden: A-Dur hat 3 Kreuze.", "Reihenfolge nehmen: Fis, Cis, Gis.", "Jedes Zeichen auf den passenden Ton-Platz setzen: Fis auf F, Cis auf C, Gis auf G.", "Im Bassschlüssel sitzen dieselben Töne an anderen Höhen als im Violinschlüssel."],
+    visual: "accidentalPlaces",
     questions: [
-      { type: "choice", q: "Was kommt beim Einzeichnen zuerst?", hint: "Ohne Reihenfolge wird der Ort schwierig.", a: "Die richtige Vorzeichen-Reihenfolge", choices: ["Die Farbe des Stifts", "Die richtige Vorzeichen-Reihenfolge", "Der Grundton allein", "Der Rhythmus"], explain: "Erst musst du wissen, welche Vorzeichen überhaupt vorkommen und in welcher Reihenfolge." },
-      { type: "choice", q: "E-Dur hat 4 Kreuze. Welche zeichnest du ein?", hint: "Erste 4 Kreuze.", a: "Fis, Cis, Gis, Dis", choices: ["Fis, Cis, Gis, Dis", "B, Es, As, Des", "Fis, Cis, Gis", "G, D, A, E"], explain: "E-Dur ist die vierte Kreuztonart: Fis, Cis, Gis, Dis." }
+      { type: "choice", q: "Was ist ein Vorzeichen am Anfang des Systems?", hint: "Es verändert einen Ton für das ganze Stück.", a: "Ein Kreuz oder Be, das einen Ton immer verändert", choices: ["Eine Note mit Rhythmus", "Ein Kreuz oder Be, das einen Ton immer verändert", "Der Name der Tonart", "Eine Pause"], explain: "Ein Vorzeichen ist kein eigener Ton. Es sagt zum Beispiel: Alle F werden zu Fis." },
+      { type: "choice", q: "A-Dur hat 3 Kreuze. Was zeichnest du ein?", hint: "Nimm die ersten 3 aus der Kreuz-Reihenfolge.", a: "Fis, Cis, Gis", choices: ["Fis, Cis, Gis", "G, D, A", "B, Es, As", "Fis, Gis, Cis"], explain: "A-Dur ist die dritte Kreuztonart. Darum nimmst du die ersten drei Kreuze: Fis, Cis, Gis." },
+      { type: "choice", q: "Warum sind die Orte im Violin- und Bassschlüssel anders?", hint: "Der gleiche Ton liegt in jedem Schlüssel an einem anderen Platz.", a: "Weil F, C oder G im Bassschlüssel an anderen Linien/Zwischenräumen liegen", choices: ["Weil die Reihenfolge anders ist", "Weil F, C oder G im Bassschlüssel an anderen Linien/Zwischenräumen liegen", "Weil Bes immer tiefer sind", "Weil Kreuze nur im Violinschlüssel vorkommen"], explain: "Die Reihenfolge bleibt gleich. Aber die Töne F, C, G usw. liegen je nach Schlüssel an anderen Stellen im Notensystem." }
     ]
   },
   {
@@ -456,6 +457,29 @@ function renderVisual(type) {
           <i class="note-dot" style="left:76%; top:6px"></i>
         </div>
         <div class="visual-labels"><span>Linien zählen</span><span>Zwischenräume erkennen</span><span>Oktave prüfen</span></div>
+      </div>
+    `;
+    return;
+  }
+
+  if (type === "accidentalPlaces") {
+    visualZone.innerHTML = `
+      <div class="accidental-guide">
+        <div class="accidental-flow">
+          <div><span>1</span><strong>Tonart</strong><small>A-Dur</small></div>
+          <div><span>2</span><strong>Anzahl</strong><small>3 Kreuze</small></div>
+          <div><span>3</span><strong>Welche?</strong><small>Fis · Cis · Gis</small></div>
+          <div><span>4</span><strong>Wohin?</strong><small>auf F · C · G</small></div>
+        </div>
+        <div class="mini-staff-card">
+          <div class="mini-staff">
+            ${[0, 1, 2, 3, 4].map((line) => `<span style="top:${line * 16 + 8}px"></span>`).join("")}
+            <b style="left:18%; top:0">♯<small>Fis</small></b>
+            <b style="left:45%; top:34px">♯<small>Cis</small></b>
+            <b style="left:70%; top:18px">♯<small>Gis</small></b>
+          </div>
+          <p>Das Kreuz steht auf dem Platz des Tons, den es verändert. Fis steht also auf einem F-Platz, Cis auf C, Gis auf G.</p>
+        </div>
       </div>
     `;
     return;

@@ -451,6 +451,89 @@ p {
   font-weight: 800;
 }
 
+.accidental-guide {
+  display: grid;
+  gap: 10px;
+}
+
+.accidental-flow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.accidental-flow div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--teal-soft);
+}
+
+.accidental-flow span {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  font-weight: 950;
+}
+
+.accidental-flow strong {
+  font-size: 16px;
+}
+
+.accidental-flow small {
+  color: #355048;
+  font-size: 13px;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.mini-staff-card {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--blue-soft);
+}
+
+.mini-staff-card p {
+  color: #26394d;
+  line-height: 1.4;
+}
+
+.mini-staff {
+  position: relative;
+  height: 92px;
+}
+
+.mini-staff span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #385070;
+}
+
+.mini-staff b {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  color: var(--coral);
+  font-size: 40px;
+  line-height: 0.8;
+}
+
+.mini-staff small {
+  color: #26394d;
+  font-size: 12px;
+  line-height: 1;
+}
+
 .keyboard {
   position: relative;
   display: grid;
@@ -829,6 +912,10 @@ p {
   }
 
   .tone-controls {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .accidental-flow {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
