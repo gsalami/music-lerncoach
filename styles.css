@@ -887,8 +887,27 @@ p {
   gap: 8px;
 }
 
-.tone-controls .text-button {
+.tone-controls .text-button,
+.demo-controls .text-button {
   width: 100%;
+}
+
+.demo-group {
+  display: grid;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.demo-group h3 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.demo-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
 }
 
 @media (min-width: 780px) {
@@ -934,6 +953,10 @@ p {
 
   .tone-controls {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .demo-controls {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .accidental-flow {

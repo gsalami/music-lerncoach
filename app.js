@@ -376,6 +376,7 @@ let currentQuestion = null;
 let challengeNote = null;
 let audioContext = null;
 let saveTimer = null;
+let demoTimers = [];
 const done = new Set(JSON.parse(localStorage.getItem("musicCoachDone") || "[]"));
 const storedExamDate = localStorage.getItem("musicCoachExamDate") || "";
 let activeProfile = JSON.parse(localStorage.getItem("musicCoachProfile") || "null");
@@ -434,6 +435,7 @@ const pianoNotes = [
 
 const scaleNotes = {
   C: ["C4", "D4", "E4", "F4", "G4", "A4", "H4", "C5"],
+  "c-Moll rein": ["C4", "D4", "Dis4", "F4", "G4", "Gis4", "Ais4", "C5"],
   G: ["G4", "A4", "H4", "C5", "D5", "E5", "Fis5", "G5"],
   A: ["A4", "H4", "Cis5", "D5", "E5", "Fis5", "Gis5", "A5"],
   F: ["F4", "G4", "A4", "Ais4", "C5", "D5", "E5", "F5"],
@@ -863,10 +865,13 @@ function getAudioContext() {
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
   }
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
   return audioContext;
 }
 
-function playTone(note, duration = 0.55) {
+function playToneAt(note, startTime, duration = 0.55, volume = 0.22) {
   const target = typeof note === "string" ? pianoNotes.find((item) => item.note === note) : note;
   if (!target) return;
   const context = getAudioContext();
@@ -874,12 +879,16 @@ function playTone(note, duration = 0.55) {
   const gain = context.createGain();
   oscillator.type = "sine";
   oscillator.frequency.value = target.freq;
-  gain.gain.setValueAtTime(0.0001, context.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.22, context.currentTime + 0.02);
-  gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + duration);
+  gain.gain.setValueAtTime(0.0001, startTime);
+  gain.gain.exponentialRampToValueAtTime(volume, startTime + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
   oscillator.connect(gain).connect(context.destination);
-  oscillator.start();
-  oscillator.stop(context.currentTime + duration + 0.03);
+  oscillator.start(startTime);
+  oscillator.stop(startTime + duration + 0.03);
+}
+
+function playTone(note, duration = 0.55) {
+  playToneAt(note, getAudioContext().currentTime, duration);
 }
 
 function setEarStatus(message, state = "") {
@@ -925,6 +934,7 @@ function renderPianoTrainer() {
 }
 
 function playChallenge() {
+  clearDemoTimers();
   const challengePool = pianoNotes.filter((note) => ["C4", "D4", "E4", "F4", "G4", "A4", "H4", "C5", "Cis5", "Fis5", "Gis5"].includes(note.note));
   challengeNote = challengePool[Math.floor(Math.random() * challengePool.length)];
   playTone(challengeNote, 0.7);
@@ -932,15 +942,93 @@ function playChallenge() {
 }
 
 function playScale(scaleName) {
+  clearDemoTimers();
+  getAudioContext();
   const notes = scaleNotes[scaleName] || [];
   const label = ["C", "G", "A", "F"].includes(scaleName) ? `${scaleName}-Dur` : scaleName;
   setEarStatus(`${label} wird vorgespielt. Danach kann sie die Tasten selbst nachspielen.`);
+  playNoteSequence(notes, 0);
+}
+
+function clearDemoTimers() {
+  demoTimers.forEach((timer) => window.clearTimeout(timer));
+  demoTimers = [];
+}
+
+function scheduleDemo(delay, callback) {
+  const timer = window.setTimeout(callback, delay);
+  demoTimers.push(timer);
+}
+
+function playClick(accent = false) {
+  const context = getAudioContext();
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  oscillator.type = "square";
+  oscillator.frequency.value = accent ? 1120 : 720;
+  gain.gain.setValueAtTime(0.0001, context.currentTime);
+  gain.gain.exponentialRampToValueAtTime(accent ? 0.28 : 0.14, context.currentTime + 0.006);
+  gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.075);
+  oscillator.connect(gain).connect(context.destination);
+  oscillator.start();
+  oscillator.stop(context.currentTime + 0.09);
+}
+
+function playNoteSequence(notes, startDelay = 0, stepMs = 430, duration = 0.35) {
   notes.forEach((noteName, index) => {
-    window.setTimeout(() => {
-      playTone(noteName, 0.35);
+    scheduleDemo(startDelay + index * stepMs, () => {
+      playTone(noteName, duration);
       flashPianoKey(noteName);
-    }, index * 430);
+    });
   });
+}
+
+function playRhythmPattern(beats, message) {
+  clearDemoTimers();
+  setEarStatus(message);
+  beats.forEach(([delay, accent]) => {
+    scheduleDemo(delay, () => playClick(accent));
+  });
+}
+
+function playAudioDemo(demo) {
+  clearDemoTimers();
+  getAudioContext();
+  const beat = 460;
+
+  if (demo === "dur-moll") {
+    setEarStatus("Zuerst C-Dur: hell/offen. Danach c-Moll: dunkler. Achtet besonders auf die dritte Stufe.");
+    playNoteSequence(scaleNotes.C, 0);
+    playNoteSequence(scaleNotes["c-Moll rein"], 4200);
+    return;
+  }
+
+  if (demo === "moll-types") {
+    setEarStatus("Reine Moll, harmonische Moll, melodische Moll: hört vor allem die oberen Töne vor dem Schluss.");
+    playNoteSequence(scaleNotes["a-Moll rein"], 0);
+    playNoteSequence(scaleNotes["a-Moll harmonisch"], 3900);
+    playNoteSequence(scaleNotes["a-Moll melodisch"], 7800);
+    return;
+  }
+
+  if (demo === "rhythm-2") {
+    playRhythmPattern([[0, true], [beat, false], [beat * 2, true], [beat * 3, false], [beat * 4, true], [beat * 5, false]], "2/4: du hörst immer stark-leicht, stark-leicht. Das fühlt sich gerade an.");
+    return;
+  }
+
+  if (demo === "rhythm-3") {
+    playRhythmPattern([[0, true], [beat, false], [beat * 2, false], [beat * 3, true], [beat * 4, false], [beat * 5, false], [beat * 6, true], [beat * 7, false], [beat * 8, false]], "3/4: du hörst stark-leicht-leicht. Das fühlt sich ungerade an.");
+    return;
+  }
+
+  if (demo === "rhythm-auftakt") {
+    playRhythmPattern([[0, false], [beat * 0.75, true], [beat * 1.75, false], [beat * 2.75, false], [beat * 3.75, true], [beat * 4.75, false], [beat * 5.75, false]], "Auftakt: zuerst kommt ein kleiner schwacher Anfang, dann erst die starke Eins.");
+    return;
+  }
+
+  if (demo === "rhythm-values") {
+    playRhythmPattern([[0, true], [beat, true], [beat + 230, false], [beat * 2, true], [beat * 2 + 115, false], [beat * 2 + 230, false], [beat * 2 + 345, false], [beat * 3, true]], "Rhythmuswerte: zuerst Viertel, dann zwei Achtel, dann vier Sechzehntel, dann wieder Viertel.");
+  }
 }
 
 function renderLesson() {
@@ -1070,6 +1158,10 @@ playChallengeButton.addEventListener("click", playChallenge);
 
 document.querySelectorAll("[data-scale]").forEach((button) => {
   button.addEventListener("click", () => playScale(button.dataset.scale));
+});
+
+document.querySelectorAll("[data-demo]").forEach((button) => {
+  button.addEventListener("click", () => playAudioDemo(button.dataset.demo));
 });
 
 markButton.addEventListener("click", () => {
