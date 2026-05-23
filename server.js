@@ -9,6 +9,7 @@ const basePath = process.env.BASE_PATH || "/music";
 const rootDir = __dirname;
 const dataDir = process.env.DATA_DIR || path.join(rootDir, "data");
 const profileFile = path.join(dataDir, "profiles.json");
+let profileWriteQueue = Promise.resolve();
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -67,7 +68,20 @@ async function readProfiles() {
 
 async function writeProfiles(profiles) {
   await fs.mkdir(dataDir, { recursive: true });
-  await fs.writeFile(profileFile, `${JSON.stringify(profiles, null, 2)}\n`);
+  const tempFile = `${profileFile}.${process.pid}.tmp`;
+  await fs.writeFile(tempFile, `${JSON.stringify(profiles, null, 2)}\n`);
+  await fs.rename(tempFile, profileFile);
+}
+
+async function updateProfiles(mutator) {
+  const nextWrite = profileWriteQueue.then(async () => {
+    const profiles = await readProfiles();
+    const result = await mutator(profiles);
+    await writeProfiles(profiles);
+    return result;
+  });
+  profileWriteQueue = nextWrite.catch(() => {});
+  return nextWrite;
 }
 
 function normalizeDone(done) {
@@ -89,20 +103,21 @@ function cleanProfile(profile) {
 async function handleApi(request, response, pathname) {
   if (request.method === "POST" && pathname === `${basePath}/api/profiles`) {
     const body = await readBody(request);
-    const profiles = await readProfiles();
-    let id = createId(body.name);
-    while (profiles[id]) id = createId(body.name);
-    const now = new Date().toISOString();
-    const profile = cleanProfile({
-      id,
-      name: sanitizeName(body.name),
-      done: body.done,
-      examDate: body.examDate,
-      createdAt: now,
-      updatedAt: now
+    const profile = await updateProfiles(async (profiles) => {
+      let id = createId(body.name);
+      while (profiles[id]) id = createId(body.name);
+      const now = new Date().toISOString();
+      const created = cleanProfile({
+        id,
+        name: sanitizeName(body.name),
+        done: body.done,
+        examDate: body.examDate,
+        createdAt: now,
+        updatedAt: now
+      });
+      profiles[id] = created;
+      return created;
     });
-    profiles[id] = profile;
-    await writeProfiles(profiles);
     sendJson(response, 201, profile);
     return true;
   }
@@ -125,15 +140,18 @@ async function handleApi(request, response, pathname) {
 
   if (request.method === "PUT") {
     const body = await readBody(request);
-    const updated = cleanProfile({
-      ...existing,
-      name: sanitizeName(body.name || existing.name),
-      done: body.done,
-      examDate: body.examDate,
-      updatedAt: new Date().toISOString()
+    const updated = await updateProfiles(async (profiles) => {
+      const latest = profiles[id] || existing;
+      const next = cleanProfile({
+        ...latest,
+        name: sanitizeName(body.name || latest.name),
+        done: body.done,
+        examDate: body.examDate,
+        updatedAt: new Date().toISOString()
+      });
+      profiles[id] = next;
+      return next;
     });
-    profiles[id] = updated;
-    await writeProfiles(profiles);
     sendJson(response, 200, updated);
     return true;
   }
