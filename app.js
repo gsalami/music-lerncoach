@@ -100,14 +100,15 @@ const goals = [
     group: "Anwendung",
     day: 3,
     title: "Vorzeichen an den richtigen Ort schreiben",
-    simple: "Vorzeichen sind die Kreuze oder Bes am Anfang eines Notensystems. Sie sagen: Dieser Ton wird im ganzen Stück immer erhöht oder erniedrigt.",
-    help: "Denke in drei Fragen: Welche Tonart? Dann weisst du, wie viele Vorzeichen. Welche Reihenfolge? Dann weisst du, welche Vorzeichen. Welcher Schlüssel? Dann weisst du, auf welche Linie oder in welchen Zwischenraum du sie zeichnest.",
+    simple: "Vorzeichen sind die Kreuze oder Bes am Anfang eines Notensystems. Kreuze erhöhen einen Ton, Bes erniedrigen ihn. Sie gelten dann für das ganze Stück.",
+    help: "Denke in drei Fragen: Welche Tonart? Dann weisst du, wie viele Vorzeichen. Welche Reihenfolge? Dann weisst du, welche Vorzeichen. Welcher Schlüssel? Dann weisst du, auf welche Linie oder in welchen Zwischenraum du sie zeichnest. Bei Kreuzen nimmst du Fis-Cis-Gis..., bei Bes nimmst du B-Es-As...",
     memory: "Nicht raten: Tonart -> Anzahl -> Reihenfolge -> Ort im Schlüssel.",
     steps: ["Tonart lesen: z.B. A-Dur.", "Anzahl finden: A-Dur hat 3 Kreuze.", "Reihenfolge nehmen: Fis, Cis, Gis.", "Jedes Zeichen auf den passenden Ton-Platz setzen: Fis auf F, Cis auf C, Gis auf G.", "Im Bassschlüssel sitzen dieselben Töne an anderen Höhen als im Violinschlüssel."],
     visual: "accidentalPlaces",
     questions: [
       { type: "choice", q: "Was ist ein Vorzeichen am Anfang des Systems?", hint: "Es verändert einen Ton für das ganze Stück.", a: "Ein Kreuz oder Be, das einen Ton immer verändert", choices: ["Eine Note mit Rhythmus", "Ein Kreuz oder Be, das einen Ton immer verändert", "Der Name der Tonart", "Eine Pause"], explain: "Ein Vorzeichen ist kein eigener Ton. Es sagt zum Beispiel: Alle F werden zu Fis." },
       { type: "choice", q: "A-Dur hat 3 Kreuze. Was zeichnest du ein?", hint: "Nimm die ersten 3 aus der Kreuz-Reihenfolge.", a: "Fis, Cis, Gis", choices: ["Fis, Cis, Gis", "G, D, A", "B, Es, As", "Fis, Gis, Cis"], explain: "A-Dur ist die dritte Kreuztonart. Darum nimmst du die ersten drei Kreuze: Fis, Cis, Gis." },
+      { type: "choice", q: "Es-Dur hat 3 Bes. Was zeichnest du ein?", hint: "Nimm die ersten 3 aus der Be-Reihenfolge.", a: "B, Es, As", choices: ["B, Es, As", "Fis, Cis, Gis", "Es, As, Des", "B, As, Es"], explain: "Es-Dur ist die dritte Be-Tonart. Darum nimmst du die ersten drei Bes: B, Es, As." },
       { type: "choice", q: "Warum sind die Orte im Violin- und Bassschlüssel anders?", hint: "Der gleiche Ton liegt in jedem Schlüssel an einem anderen Platz.", a: "Weil F, C oder G im Bassschlüssel an anderen Linien/Zwischenräumen liegen", choices: ["Weil die Reihenfolge anders ist", "Weil F, C oder G im Bassschlüssel an anderen Linien/Zwischenräumen liegen", "Weil Bes immer tiefer sind", "Weil Kreuze nur im Violinschlüssel vorkommen"], explain: "Die Reihenfolge bleibt gleich. Aber die Töne F, C, G usw. liegen je nach Schlüssel an anderen Stellen im Notensystem." }
     ]
   },
@@ -465,20 +466,43 @@ function renderVisual(type) {
   if (type === "accidentalPlaces") {
     visualZone.innerHTML = `
       <div class="accidental-guide">
-        <div class="accidental-flow">
-          <div><span>1</span><strong>Tonart</strong><small>A-Dur</small></div>
-          <div><span>2</span><strong>Anzahl</strong><small>3 Kreuze</small></div>
-          <div><span>3</span><strong>Welche?</strong><small>Fis · Cis · Gis</small></div>
-          <div><span>4</span><strong>Wohin?</strong><small>auf F · C · G</small></div>
-        </div>
-        <div class="mini-staff-card">
-          <div class="mini-staff">
-            ${[0, 1, 2, 3, 4].map((line) => `<span style="top:${line * 16 + 8}px"></span>`).join("")}
-            <b style="left:18%; top:0">♯<small>Fis</small></b>
-            <b style="left:45%; top:34px">♯<small>Cis</small></b>
-            <b style="left:70%; top:18px">♯<small>Gis</small></b>
+        <div class="accidental-compare">
+          <div class="accidental-example">
+            <h3>Kreuze erhöhen</h3>
+            <div class="accidental-flow">
+              <div><span>1</span><strong>Tonart</strong><small>A-Dur</small></div>
+              <div><span>2</span><strong>Anzahl</strong><small>3 Kreuze</small></div>
+              <div><span>3</span><strong>Welche?</strong><small>Fis · Cis · Gis</small></div>
+              <div><span>4</span><strong>Wohin?</strong><small>auf F · C · G</small></div>
+            </div>
+            <div class="mini-staff-card">
+              <div class="mini-staff">
+                ${[0, 1, 2, 3, 4].map((line) => `<span style="top:${line * 16 + 8}px"></span>`).join("")}
+                <b style="left:18%; top:0">♯<small>Fis</small></b>
+                <b style="left:45%; top:34px">♯<small>Cis</small></b>
+                <b style="left:70%; top:18px">♯<small>Gis</small></b>
+              </div>
+              <p>Das Kreuz steht auf dem Platz des Tons, den es erhöht: F wird Fis, C wird Cis, G wird Gis.</p>
+            </div>
           </div>
-          <p>Das Kreuz steht auf dem Platz des Tons, den es verändert. Fis steht also auf einem F-Platz, Cis auf C, Gis auf G.</p>
+          <div class="accidental-example">
+            <h3>Bes erniedrigen</h3>
+            <div class="accidental-flow">
+              <div><span>1</span><strong>Tonart</strong><small>Es-Dur</small></div>
+              <div><span>2</span><strong>Anzahl</strong><small>3 Bes</small></div>
+              <div><span>3</span><strong>Welche?</strong><small>B · Es · As</small></div>
+              <div><span>4</span><strong>Wohin?</strong><small>auf H · E · A</small></div>
+            </div>
+            <div class="mini-staff-card">
+              <div class="mini-staff">
+                ${[0, 1, 2, 3, 4].map((line) => `<span style="top:${line * 16 + 8}px"></span>`).join("")}
+                <b class="flat" style="left:18%; top:25px">♭<small>B</small></b>
+                <b class="flat" style="left:45%; top:0">♭<small>Es</small></b>
+                <b class="flat" style="left:70%; top:42px">♭<small>As</small></b>
+              </div>
+              <p>Das Be steht auf dem Platz des Tons, den es erniedrigt: H wird B, E wird Es, A wird As.</p>
+            </div>
+          </div>
         </div>
       </div>
     `;

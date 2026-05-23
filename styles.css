@@ -456,6 +456,18 @@ p {
   gap: 10px;
 }
 
+.accidental-compare,
+.accidental-example {
+  display: grid;
+  gap: 10px;
+}
+
+.accidental-example h3 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
 .accidental-flow {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -526,6 +538,10 @@ p {
   color: var(--coral);
   font-size: 40px;
   line-height: 0.8;
+}
+
+.mini-staff b.flat {
+  color: var(--teal);
 }
 
 .mini-staff small {
@@ -917,5 +933,10 @@ p {
 
   .accidental-flow {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .accidental-compare {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
   }
 }
