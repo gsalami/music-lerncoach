@@ -205,6 +205,7 @@ let mixedMode = false;
 let currentQuestion = null;
 let challengeNote = null;
 let audioContext = null;
+let saveTimer = null;
 const done = new Set(JSON.parse(localStorage.getItem("musicCoachDone") || "[]"));
 const storedExamDate = localStorage.getItem("musicCoachExamDate") || "";
 let activeProfile = JSON.parse(localStorage.getItem("musicCoachProfile") || "null");
@@ -373,6 +374,15 @@ async function saveProfile() {
   } catch (error) {
     setProfileStatus(`Server-Speichern fehlgeschlagen. Lokal bleibt es erhalten. ${error.message}`, "is-error");
   }
+}
+
+function queueProfileSave() {
+  window.clearTimeout(saveTimer);
+  localStorage.setItem("musicCoachExamDate", examDateInput.value);
+  renderTracker();
+  saveTimer = window.setTimeout(() => {
+    saveProfile();
+  }, 250);
 }
 
 function renderTabs() {
@@ -764,9 +774,8 @@ document.querySelectorAll(".day-button").forEach((button) => {
   });
 });
 
-examDateInput.addEventListener("change", () => {
-  saveProfile();
-  renderTracker();
+["input", "change", "blur"].forEach((eventName) => {
+  examDateInput.addEventListener(eventName, queueProfileSave);
 });
 
 document.querySelector("#createProfileButton").addEventListener("click", createProfile);
